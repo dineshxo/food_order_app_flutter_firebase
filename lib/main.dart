@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:food_order/pages/home.dart';
+
+import 'package:food_order/pages/login_page.dart';
+import 'package:food_order/themes/theme_provider.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+    create: (context) => ThemeProvider(),
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -14,10 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-            fontFamily: 'InterTight'),
-        home: const Home());
+        theme: Provider.of<ThemeProvider>(context).themeData,
+        home: const LoginPage());
   }
 }
