@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:food_order/models/food.dart';
 
-class Restaurant {
+class Restaurant extends ChangeNotifier {
   final List<Food> _menu = [
     Food(
         name: 'Classic Burger',
@@ -262,4 +263,17 @@ class Restaurant {
           AddOn(name: 'Sprinkles', price: 0.25)
         ]),
   ];
+
+  //GETTERS
+  List<Food> get menu => _menu;
+
+  //OPERATIONS
+
+  //METHODS
+
+  //HELPERS
+
+  //Generate a receipt
+  //Format Double values into money
+  //Format list of addons into a String summary
 }
