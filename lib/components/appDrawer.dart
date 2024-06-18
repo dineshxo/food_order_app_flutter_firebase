@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_order/components/drawerTile.dart';
+import 'package:food_order/pages/settings.dart';
 
 class appDrawer extends StatelessWidget {
   const appDrawer({super.key});
@@ -23,12 +24,19 @@ class appDrawer extends StatelessWidget {
             DrawerTile(
               title: "Home",
               icon: Icons.home,
-              onTap: () {},
+              onTap: () => Navigator.pop(context),
             ),
             DrawerTile(
               title: "Settings",
               icon: Icons.settings,
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SettingsPage(),
+                  ),
+                );
+              },
             ),
             const Spacer(),
             DrawerTile(
