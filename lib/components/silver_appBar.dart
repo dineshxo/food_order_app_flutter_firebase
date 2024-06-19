@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_order/pages/cart_page.dart';
 
 class SilAppBar extends StatelessWidget {
   final Widget child;
@@ -18,7 +19,12 @@ class SilAppBar extends StatelessWidget {
       floating: false,
       pinned: true,
       actions: [
-        IconButton(onPressed: () {}, icon: const Icon(Icons.shopping_cart))
+        IconButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const CartPage()));
+            },
+            icon: const Icon(Icons.shopping_cart))
       ],
       backgroundColor: Theme.of(context).colorScheme.surface,
       foregroundColor: Theme.of(context).colorScheme.inversePrimary,

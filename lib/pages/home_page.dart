@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_order/components/current_location.dart';
 import 'package:food_order/components/descriptionBox.dart';
 import 'package:food_order/components/food_tile.dart';
-import 'package:food_order/components/silAppBar.dart';
+import 'package:food_order/components/silver_appBar.dart';
 import 'package:food_order/components/tabBar.dart';
 import 'package:food_order/models/food.dart';
 import 'package:food_order/models/restaurant.dart';
