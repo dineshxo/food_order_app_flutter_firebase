@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:food_order/auth/login_or_register.dart';
+import 'package:food_order/services/auth/auth_check.dart';
+import 'package:food_order/services/auth/login_or_register.dart';
 import 'package:food_order/firebase_options.dart';
 import 'package:food_order/models/restaurant.dart';
 
@@ -31,6 +32,6 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
         theme: Provider.of<ThemeProvider>(context).themeData,
-        home: const LoginOrRegister());
+        home: const AuthCheck());
   }
 }

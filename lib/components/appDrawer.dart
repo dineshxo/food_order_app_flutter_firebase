@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_order/components/drawerTile.dart';
 import 'package:food_order/pages/settings.dart';
+import 'package:food_order/services/auth/auth_service.dart';
 
 class appDrawer extends StatelessWidget {
   const appDrawer({super.key});
@@ -42,7 +44,10 @@ class appDrawer extends StatelessWidget {
             DrawerTile(
               title: "Logout",
               icon: Icons.logout,
-              onTap: () {},
+              onTap: () async {
+                final _authServices = AuthService();
+                await _authServices.signOut();
+              },
             ),
           ],
         ),
