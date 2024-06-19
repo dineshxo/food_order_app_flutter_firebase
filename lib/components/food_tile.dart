@@ -3,8 +3,8 @@ import 'package:food_order/models/food.dart';
 
 class FoodTile extends StatelessWidget {
   final Food food;
-
   final void Function()? onTap;
+
   const FoodTile({super.key, required this.food, this.onTap});
 
   @override

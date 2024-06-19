@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Currentlocation extends StatelessWidget {
-  const Currentlocation({super.key});
+class CurrentLocation extends StatelessWidget {
+  const CurrentLocation({super.key});
 
   void openLocationSearchBox(BuildContext context) {
     showDialog(
@@ -48,7 +48,7 @@ class Currentlocation extends StatelessWidget {
                       color: Theme.of(context).colorScheme.inversePrimary,
                       fontWeight: FontWeight.bold),
                 ),
-                Icon(Icons.keyboard_arrow_down_rounded)
+                const Icon(Icons.keyboard_arrow_down_rounded)
               ],
             ),
           )

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:food_order/components/currentLocation.dart';
+import 'package:food_order/components/current_location.dart';
 import 'package:food_order/components/descriptionBox.dart';
-import 'package:food_order/components/foodTile.dart';
+import 'package:food_order/components/food_tile.dart';
 import 'package:food_order/components/silAppBar.dart';
 import 'package:food_order/components/tabBar.dart';
 import 'package:food_order/models/food.dart';
 import 'package:food_order/models/restaurant.dart';
+import 'package:food_order/pages/food_page.dart';
 import 'package:provider/provider.dart';
 
 import '../components/appDrawer.dart';
@@ -49,7 +50,8 @@ class _HomePageState extends State<HomePage>
           final food = categoryMenu[index];
           return FoodTile(
             food: food,
-            onTap: () {},
+            onTap: () => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => FoodPage(food: food))),
           );
         },
       );
@@ -73,7 +75,7 @@ class _HomePageState extends State<HomePage>
                           endIndent: 25,
                           color: Theme.of(context).colorScheme.secondary,
                         ),
-                        Currentlocation(),
+                        CurrentLocation(),
                         DescriptionBox(),
                       ],
                     )),
