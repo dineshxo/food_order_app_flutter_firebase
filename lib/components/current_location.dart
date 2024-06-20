@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:food_order/models/restaurant.dart';
+import 'package:provider/provider.dart';
 
 class CurrentLocation extends StatelessWidget {
-  const CurrentLocation({super.key});
+  CurrentLocation({super.key});
+
+  final TextEditingController addressController = TextEditingController();
 
   void openLocationSearchBox(BuildContext context) {
     showDialog(
@@ -9,7 +13,8 @@ class CurrentLocation extends StatelessWidget {
       builder: (context) => AlertDialog(
         title: const Text("Your Location"),
         content: TextField(
-          decoration: InputDecoration(hintText: "Search Address"),
+          controller: addressController,
+          decoration: const InputDecoration(hintText: "Enter Address"),
         ),
         actions: [
           MaterialButton(
@@ -17,7 +22,11 @@ class CurrentLocation extends StatelessWidget {
             child: const Text("Cancel"),
           ),
           MaterialButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () {
+              Navigator.pop(context);
+              String newAddress = addressController.text;
+              context.read<Restaurant>().updateDeliveryAddress(newAddress);
+            },
             child: const Text("Save"),
           ),
         ],
@@ -42,11 +51,13 @@ class CurrentLocation extends StatelessWidget {
             onTap: () => openLocationSearchBox(context),
             child: Row(
               children: [
-                Text(
-                  "Warakapola, Sri Lanka",
-                  style: TextStyle(
-                      color: Theme.of(context).colorScheme.inversePrimary,
-                      fontWeight: FontWeight.bold),
+                Consumer<Restaurant>(
+                  builder: (context, restaurant, child) => Text(
+                    restaurant.deliveryAddress,
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.inversePrimary,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
                 const Icon(Icons.keyboard_arrow_down_rounded)
               ],

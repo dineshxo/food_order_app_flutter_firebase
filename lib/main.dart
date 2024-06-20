@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Food Delivery',
         debugShowCheckedModeBanner: false,
         theme: Provider.of<ThemeProvider>(context).themeData,
         home: const AuthCheck());
