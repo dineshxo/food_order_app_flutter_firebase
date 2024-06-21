@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_order/components/main_button.dart';
 import 'package:food_order/components/main_text_filed.dart';
+import 'package:food_order/services/auth/auth_service.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key, this.onTap});
@@ -15,6 +16,29 @@ class _RegisterState extends State<Register> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
+
+  void register() async {
+    final _authService = AuthService();
+
+    if (passwordController.text == confirmPasswordController.text) {
+      try {
+        await _authService.signUpWithEmailPassword(
+            emailController.text, passwordController.text);
+      } catch (e) {
+        showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  title: Text(e.toString()),
+                ));
+      }
+    } else {
+      showDialog(
+          context: context,
+          builder: (context) => const AlertDialog(
+                title: Text("Passwords doesn't match."),
+              ));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +82,7 @@ class _RegisterState extends State<Register> {
                 height: 10,
               ),
               MainTextField(
-                  controller: passwordController,
+                  controller: confirmPasswordController,
                   hintText: "Confirm Password",
                   obscureText: true),
               const SizedBox(
@@ -66,7 +90,7 @@ class _RegisterState extends State<Register> {
               ),
               MainButton(
                 text: "Sign up",
-                onTap: () {},
+                onTap: register,
               ),
               const SizedBox(
                 height: 5,
