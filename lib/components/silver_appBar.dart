@@ -19,12 +19,41 @@ class SilAppBar extends StatelessWidget {
       floating: false,
       pinned: true,
       actions: [
-        IconButton(
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const CartPage()));
-            },
-            icon: const Icon(Icons.shopping_cart))
+        Container(
+          margin: const EdgeInsets.only(right: 10),
+          child: Row(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                    color: Colors.lime.shade400, shape: BoxShape.circle),
+                child: IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const CartPage()));
+                    },
+                    icon: const Icon(
+                      Icons.shopping_cart,
+                      color: Colors.black87,
+                    )),
+              ),
+              const SizedBox(
+                width: 5,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                    color: Colors.lime.shade400, shape: BoxShape.circle),
+                child: IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.notifications,
+                      color: Colors.black87,
+                    )),
+              ),
+            ],
+          ),
+        )
       ],
       backgroundColor: Theme.of(context).colorScheme.surface,
       foregroundColor: Theme.of(context).colorScheme.inversePrimary,
