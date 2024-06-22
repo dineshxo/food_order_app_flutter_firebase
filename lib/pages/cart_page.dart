@@ -18,6 +18,7 @@ class _CartPageState extends State<CartPage> {
     return Consumer<Restaurant>(
       builder: (context, restaurant, child) {
         final userCart = restaurant.cart;
+        final totalPrice = restaurant.getTotalPrice();
         return Scaffold(
           backgroundColor: Theme.of(context).colorScheme.surface,
           appBar: AppBar(
@@ -45,7 +46,19 @@ class _CartPageState extends State<CartPage> {
               Expanded(
                 child: userCart.isEmpty
                     ? const Center(
-                        child: Text("Cart is empty. Add items to cart."),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Cart is empty.",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
+                            Text(
+                              "Add items to cart.",
+                            ),
+                          ],
+                        ),
                       )
                     : ListView.builder(
                         itemCount: userCart.length,
@@ -56,19 +69,35 @@ class _CartPageState extends State<CartPage> {
                       ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.all(20.0), // Add padding to MainButton
-                child: Opacity(
-                  opacity: userCart.isEmpty ? 0.5 : 1,
-                  child: MainButton(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const PaymentPage()));
-                    },
-                    text: "Checkout",
-                  ),
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  children: [
+                    Text(
+                      "Total: \$${totalPrice.toStringAsFixed(2)}",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Opacity(
+                      opacity: userCart.isEmpty ? 0.5 : 1,
+                      child: MainButton(
+                        onTap: () {
+                          if (userCart.isNotEmpty) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => PaymentPage(
+                                          total: totalPrice,
+                                        )));
+                          }
+                        },
+                        text: "Checkout",
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],

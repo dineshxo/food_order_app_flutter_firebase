@@ -344,13 +344,14 @@ class Restaurant extends ChangeNotifier {
   String displayCartReceipt() {
     final receipt = StringBuffer();
     receipt.writeln("Here's your receipt");
+    receipt.writeln("---------------------------------------");
     receipt.writeln();
 
     String formattedDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
     receipt.writeln(formattedDate);
 
     receipt.writeln();
-    receipt.writeln("--------");
+    receipt.writeln("---------------------------------------");
 
     for (final cartItem in _cart) {
       receipt.writeln(
@@ -361,7 +362,7 @@ class Restaurant extends ChangeNotifier {
       receipt.writeln();
     }
 
-    receipt.writeln("--------");
+    receipt.writeln("---------------------------------------");
     receipt.writeln();
     receipt.writeln('Total Items: ${getTotalItemCount()}');
     receipt.writeln('Total price: ${_formatPrice(getTotalPrice())}');

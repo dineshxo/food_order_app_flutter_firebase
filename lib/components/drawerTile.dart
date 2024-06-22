@@ -17,7 +17,10 @@ class DrawerTile extends StatelessWidget {
             color: Theme.of(context).colorScheme.inversePrimary,
             fontWeight: FontWeight.w600),
       ),
-      leading: Icon(icon),
+      leading: Icon(
+        icon,
+        color: Theme.of(context).colorScheme.primary,
+      ),
       onTap: onTap,
     );
   }

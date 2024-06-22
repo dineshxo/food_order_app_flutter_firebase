@@ -16,18 +16,18 @@ class CartTile extends StatelessWidget {
         builder: (context, restaurant, child) => Container(
               padding: const EdgeInsets.all(10),
               margin: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-              decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.tertiary,
-                  borderRadius: BorderRadius.circular(15),
-                  boxShadow: [
-                    BoxShadow(
-                      color:
-                          const Color.fromARGB(255, 3, 0, 0).withOpacity(0.2),
-                      spreadRadius: 2,
-                      blurRadius: 5,
-                      offset: const Offset(0, 3),
-                    ),
-                  ]),
+              // decoration: BoxDecoration(
+              //     color: Theme.of(context).colorScheme.tertiary,
+              //     borderRadius: BorderRadius.circular(15),
+              //     boxShadow: [
+              //       BoxShadow(
+              //         color:
+              //             const Color.fromARGB(255, 3, 0, 0).withOpacity(0.2),
+              //         spreadRadius: 2,
+              //         blurRadius: 5,
+              //         offset: const Offset(0, 3),
+              //       ),
+              //     ]),
               child: Column(
                 children: [
                   Row(
@@ -36,8 +36,8 @@ class CartTile extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                         child: Image.asset(
                           cartItem.food.imagePath,
-                          height: 100,
-                          width: 100,
+                          height: 70,
+                          width: 70,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -56,15 +56,16 @@ class CartTile extends StatelessWidget {
                             height: 10,
                           ),
                           Row(
+                            mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text('\$${cartItem.food.price.toString()}',
                                   style: TextStyle(
                                       color: priceGreen,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 25)),
+                                      fontSize: 20)),
                               const SizedBox(
-                                width: 15,
+                                width: 30,
                               ),
                               QuantitySelector(
                                 quantity: cartItem.quantity,
@@ -86,7 +87,7 @@ class CartTile extends StatelessWidget {
                   SizedBox(
                     height: cartItem.selectedAddOns.isEmpty ? 0 : 60,
                     child: ListView(
-                        padding: const EdgeInsets.all(5),
+                        padding: const EdgeInsets.symmetric(horizontal: 5),
                         scrollDirection: Axis.horizontal,
                         children: cartItem.selectedAddOns
                             .map((addOn) => Padding(
@@ -121,7 +122,10 @@ class CartTile extends StatelessWidget {
                                       onSelected: (value) {}),
                                 ))
                             .toList()),
-                  )
+                  ),
+                  Divider(
+                    color: mainYellow,
+                  ),
                 ],
               ),
             ));
