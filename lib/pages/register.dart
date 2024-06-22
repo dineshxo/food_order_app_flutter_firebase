@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_order/components/main_button.dart';
 import 'package:food_order/components/main_text_filed.dart';
+import 'package:food_order/constants/style.dart';
 import 'package:food_order/services/auth/auth_service.dart';
 
 class Register extends StatefulWidget {
@@ -50,24 +51,22 @@ class _RegisterState extends State<Register> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                Icons.lock_open_outlined,
-                size: 100,
-                color: Theme.of(context).colorScheme.inversePrimary,
-              ),
+              Image.asset('images/main.png'),
               const SizedBox(
                 height: 25,
               ),
               Text(
-                "Let's create a account for you.",
+                "Let's Create an Account for you.",
                 style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
                     color: Theme.of(context).colorScheme.inversePrimary),
               ),
               const SizedBox(
                 height: 10,
               ),
               MainTextField(
+                  icon: Icons.email,
                   controller: emailController,
                   hintText: "Email",
                   obscureText: false),
@@ -75,6 +74,7 @@ class _RegisterState extends State<Register> {
                 height: 10,
               ),
               MainTextField(
+                  icon: Icons.lock_outline_rounded,
                   controller: passwordController,
                   hintText: "Password",
                   obscureText: true),
@@ -82,6 +82,7 @@ class _RegisterState extends State<Register> {
                 height: 10,
               ),
               MainTextField(
+                  icon: Icons.lock_outline_rounded,
                   controller: confirmPasswordController,
                   hintText: "Confirm Password",
                   obscureText: true),
@@ -98,7 +99,10 @@ class _RegisterState extends State<Register> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Already a member?"),
+                  Text(
+                    "Already a member?",
+                    style: smBoldTextStyle,
+                  ),
                   TextButton(
                       onPressed: () {
                         widget.onTap!();

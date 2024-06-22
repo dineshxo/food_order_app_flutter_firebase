@@ -18,38 +18,26 @@ class _CartPageState extends State<CartPage> {
     return Consumer<Restaurant>(
       builder: (context, restaurant, child) {
         final userCart = restaurant.cart;
+        final totalPrice = restaurant.getTotalPrice();
         return Scaffold(
           backgroundColor: Theme.of(context).colorScheme.surface,
           appBar: AppBar(
             title: const Text("Cart"),
             centerTitle: true,
             actions: [
-              IconButton(
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      title: const Text(
-                          "Are you sure you want to clear the cart?"),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: const Text("Cancel"),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            restaurant.clearCart();
-                            Navigator.pop(context);
-                          },
-                          child: const Text("Yes"),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-                icon: Icon(Icons.close),
+              Container(
+                margin: const EdgeInsets.only(right: 10),
+                decoration: const BoxDecoration(
+                    color: Colors.redAccent, shape: BoxShape.circle),
+                child: IconButton(
+                    onPressed: () {
+                      _clearCartDialog(context, restaurant);
+                    },
+                    icon: const Icon(
+                      Icons.delete_forever_rounded,
+                      color: Colors.white,
+                      size: 25,
+                    )),
               ),
             ],
           ),
@@ -58,7 +46,19 @@ class _CartPageState extends State<CartPage> {
               Expanded(
                 child: userCart.isEmpty
                     ? const Center(
-                        child: Text("Cart is empty. Add items to cart."),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Cart is empty.",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
+                            Text(
+                              "Add items to cart.",
+                            ),
+                          ],
+                        ),
                       )
                     : ListView.builder(
                         itemCount: userCart.length,
@@ -69,25 +69,66 @@ class _CartPageState extends State<CartPage> {
                       ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.all(20.0), // Add padding to MainButton
-                child: Opacity(
-                  opacity: userCart.isEmpty ? 0.5 : 1,
-                  child: MainButton(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const PaymentPage()));
-                    },
-                    text: "Checkout",
-                  ),
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  children: [
+                    Text(
+                      "Total: \$${totalPrice.toStringAsFixed(2)}",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Opacity(
+                      opacity: userCart.isEmpty ? 0.5 : 1,
+                      child: MainButton(
+                        onTap: () {
+                          if (userCart.isNotEmpty) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => PaymentPage(
+                                          total: totalPrice,
+                                        )));
+                          }
+                        },
+                        text: "Checkout",
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
           ),
         );
       },
+    );
+  }
+
+  Future<dynamic> _clearCartDialog(
+      BuildContext context, Restaurant restaurant) {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Are you sure you want to clear the cart?"),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text("Cancel"),
+          ),
+          TextButton(
+            onPressed: () {
+              restaurant.clearCart();
+              Navigator.pop(context);
+            },
+            child: const Text("Yes"),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_order/components/quantity_selector.dart';
+import 'package:food_order/constants/style.dart';
 import 'package:food_order/models/cart_item.dart';
 import 'package:food_order/models/restaurant.dart';
 import 'package:provider/provider.dart';
@@ -15,9 +16,18 @@ class CartTile extends StatelessWidget {
         builder: (context, restaurant, child) => Container(
               padding: const EdgeInsets.all(10),
               margin: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-              decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.secondary,
-                  borderRadius: BorderRadius.circular(15)),
+              // decoration: BoxDecoration(
+              //     color: Theme.of(context).colorScheme.tertiary,
+              //     borderRadius: BorderRadius.circular(15),
+              //     boxShadow: [
+              //       BoxShadow(
+              //         color:
+              //             const Color.fromARGB(255, 3, 0, 0).withOpacity(0.2),
+              //         spreadRadius: 2,
+              //         blurRadius: 5,
+              //         offset: const Offset(0, 3),
+              //       ),
+              //     ]),
               child: Column(
                 children: [
                   Row(
@@ -26,34 +36,50 @@ class CartTile extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8),
                         child: Image.asset(
                           cartItem.food.imagePath,
-                          height: 100,
-                          width: 100,
+                          height: 70,
+                          width: 70,
                           fit: BoxFit.cover,
                         ),
                       ),
                       const SizedBox(
-                        width: 10,
+                        width: 20,
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             cartItem.food.name,
-                            style: const TextStyle(fontWeight: FontWeight.bold),
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 17),
                           ),
-                          Text('\$${cartItem.food.price.toString()}',
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 16)),
-                          QuantitySelector(
-                              quantity: cartItem.quantity,
-                              food: cartItem.food,
-                              onIncrement: () {
-                                restaurant.addToCart(
-                                    cartItem.food, cartItem.selectedAddOns);
-                              },
-                              onDecrement: () {
-                                restaurant.removeFromCart(cartItem);
-                              }),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('\$${cartItem.food.price.toString()}',
+                                  style: TextStyle(
+                                      color: priceGreen,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20)),
+                              const SizedBox(
+                                width: 30,
+                              ),
+                              QuantitySelector(
+                                quantity: cartItem.quantity,
+                                food: cartItem.food,
+                                onIncrement: () {
+                                  restaurant.addToCart(
+                                      cartItem.food, cartItem.selectedAddOns);
+                                },
+                                onDecrement: () {
+                                  restaurant.removeFromCart(cartItem);
+                                },
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                     ],
@@ -61,7 +87,7 @@ class CartTile extends StatelessWidget {
                   SizedBox(
                     height: cartItem.selectedAddOns.isEmpty ? 0 : 60,
                     child: ListView(
-                        padding: const EdgeInsets.all(5),
+                        padding: const EdgeInsets.symmetric(horizontal: 5),
                         scrollDirection: Axis.horizontal,
                         children: cartItem.selectedAddOns
                             .map((addOn) => Padding(
@@ -96,7 +122,10 @@ class CartTile extends StatelessWidget {
                                       onSelected: (value) {}),
                                 ))
                             .toList()),
-                  )
+                  ),
+                  Divider(
+                    color: mainYellow,
+                  ),
                 ],
               ),
             ));

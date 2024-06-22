@@ -344,13 +344,14 @@ class Restaurant extends ChangeNotifier {
   String displayCartReceipt() {
     final receipt = StringBuffer();
     receipt.writeln("Here's your receipt");
+    receipt.writeln("---------------------------------------");
     receipt.writeln();
 
     String formattedDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
     receipt.writeln(formattedDate);
 
     receipt.writeln();
-    receipt.writeln("--------");
+    receipt.writeln("---------------------------------------");
 
     for (final cartItem in _cart) {
       receipt.writeln(
@@ -361,7 +362,7 @@ class Restaurant extends ChangeNotifier {
       receipt.writeln();
     }
 
-    receipt.writeln("--------");
+    receipt.writeln("---------------------------------------");
     receipt.writeln();
     receipt.writeln('Total Items: ${getTotalItemCount()}');
     receipt.writeln('Total price: ${_formatPrice(getTotalPrice())}');
@@ -381,5 +382,20 @@ class Restaurant extends ChangeNotifier {
     return addOns
         .map((addOn) => "${addOn.name}(${_formatPrice(addOn.price)})")
         .join(",");
+  }
+
+  // Function to get the full menu
+  List<Food> getFullMenu() {
+    return _menu;
+  }
+
+  // Function to categorize food items by their category
+  Map<FoodCategory, List<Food>> categorizeFoodItems() {
+    Map<FoodCategory, List<Food>> categorizedFood = {};
+    for (FoodCategory category in FoodCategory.values) {
+      categorizedFood[category] =
+          _menu.where((food) => food.category == category).toList();
+    }
+    return categorizedFood;
   }
 }

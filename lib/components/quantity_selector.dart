@@ -23,6 +23,7 @@ class QuantitySelector extends StatelessWidget {
       ),
       padding: const EdgeInsets.all(8),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           GestureDetector(
             onTap: onDecrement,
@@ -39,6 +40,8 @@ class QuantitySelector extends StatelessWidget {
               child: Center(
                 child: Text(
                   quantity.toString(),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 15),
                 ),
               ),
             ),
