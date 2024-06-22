@@ -4,8 +4,8 @@ import 'package:food_order/components/drawerTile.dart';
 import 'package:food_order/pages/settings.dart';
 import 'package:food_order/services/auth/auth_service.dart';
 
-class appDrawer extends StatelessWidget {
-  const appDrawer({super.key});
+class AppDrawer extends StatelessWidget {
+  const AppDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +15,14 @@ class appDrawer extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 50),
         child: Column(
           children: [
-            const Icon(
-              Icons.account_circle,
-              size: 80,
+            ClipRRect(
+              borderRadius: BorderRadius.circular(40),
+              child: Image.asset(
+                'images/avatar.jpg',
+                height: 80,
+                width: 80,
+                fit: BoxFit.cover,
+              ),
             ),
             const SizedBox(
               height: 20,

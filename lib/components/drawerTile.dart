@@ -13,7 +13,9 @@ class DrawerTile extends StatelessWidget {
     return ListTile(
       title: Text(
         title,
-        style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
+        style: TextStyle(
+            color: Theme.of(context).colorScheme.inversePrimary,
+            fontWeight: FontWeight.w600),
       ),
       leading: Icon(icon),
       onTap: onTap,

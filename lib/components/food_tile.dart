@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_order/constants/style.dart';
 import 'package:food_order/models/food.dart';
 
 class FoodTile extends StatelessWidget {
@@ -10,13 +11,25 @@ class FoodTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         GestureDetector(
           onTap: onTap,
           child: Padding(
-            padding: const EdgeInsets.all(15.0),
+            padding: const EdgeInsets.all(10.0),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.asset(
+                    food.imagePath,
+                    height: 80,
+                  ),
+                ),
+                const SizedBox(
+                  width: 15,
+                ),
                 Expanded(
                     child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,26 +42,30 @@ class FoodTile extends StatelessWidget {
                     Text(
                       '\$${food.price}',
                       style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
+                          color: Colors.green.shade300,
                           fontWeight: FontWeight.bold,
                           fontSize: 18),
                     ),
                     Text(food.description),
                   ],
                 )),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Image.asset(
-                    food.imagePath,
-                    height: 120,
+                Container(
+                  margin: const EdgeInsets.only(right: 10),
+                  padding: const EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.tertiary,
+                      shape: BoxShape.circle),
+                  child: const Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    size: 15,
                   ),
-                ),
+                )
               ],
             ),
           ),
         ),
         Divider(
-          color: Theme.of(context).colorScheme.tertiary,
+          color: Colors.amber.shade300,
           indent: 25,
           endIndent: 25,
         )

@@ -105,11 +105,11 @@ class _FoodPageState extends State<FoodPage> {
       ),
       SafeArea(
         child: Opacity(
-          opacity: 0.8,
+          opacity: 1,
           child: Container(
             margin: const EdgeInsets.all(15),
             decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.secondary,
+                color: Theme.of(context).colorScheme.tertiary,
                 shape: BoxShape.circle),
             child: IconButton(
               onPressed: () => Navigator.pop(context),

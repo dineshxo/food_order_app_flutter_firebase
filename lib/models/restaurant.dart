@@ -382,4 +382,19 @@ class Restaurant extends ChangeNotifier {
         .map((addOn) => "${addOn.name}(${_formatPrice(addOn.price)})")
         .join(",");
   }
+
+  // Function to get the full menu
+  List<Food> getFullMenu() {
+    return _menu;
+  }
+
+  // Function to categorize food items by their category
+  Map<FoodCategory, List<Food>> categorizeFoodItems() {
+    Map<FoodCategory, List<Food>> categorizedFood = {};
+    for (FoodCategory category in FoodCategory.values) {
+      categorizedFood[category] =
+          _menu.where((food) => food.category == category).toList();
+    }
+    return categorizedFood;
+  }
 }
