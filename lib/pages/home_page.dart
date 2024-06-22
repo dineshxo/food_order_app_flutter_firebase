@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_order/components/current_location.dart';
 
 import 'package:food_order/components/food_tile.dart';
+import 'package:food_order/components/navBar_menu_button.dart';
 
 import 'package:food_order/constants/style.dart';
 import 'package:food_order/models/food.dart';
@@ -44,37 +45,57 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Theme.of(context).colorScheme.surface,
       drawer: const AppDrawer(),
       appBar: AppBar(
-        leading: Container(
-          margin: const EdgeInsets.only(left: 10),
-          decoration: BoxDecoration(color: mainYellow, shape: BoxShape.circle),
-          child: IconButton(
-              onPressed: () {
-                _scaffoldKey.currentState?.openDrawer();
-              },
-              icon: const Icon(
-                Icons.menu_sharp,
-                color: Colors.black,
-              )),
-        ),
+        leading: NavBarMenuButton(scaffoldKey: _scaffoldKey),
         actions: [
           Container(
             margin: const EdgeInsets.only(right: 10),
             child: Row(
               children: [
-                Container(
-                  decoration: const BoxDecoration(
-                      color: Colors.limeAccent, shape: BoxShape.circle),
-                  child: IconButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const CartPage()));
-                      },
-                      icon: const Icon(
-                        Icons.shopping_cart,
-                        color: Colors.black,
-                      )),
+                Consumer<Restaurant>(
+                  builder: (context, restaurant, child) {
+                    int cartQuantity = restaurant.cart
+                        .fold(0, (sum, item) => sum + item.quantity);
+                    return Stack(
+                      children: [
+                        Container(
+                          decoration: const BoxDecoration(
+                              color: Colors.limeAccent, shape: BoxShape.circle),
+                          child: IconButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const CartPage()),
+                              );
+                            },
+                            icon: const Icon(
+                              Icons.shopping_cart,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                        if (cartQuantity > 0)
+                          Positioned(
+                            right: 0,
+                            top: -6,
+                            child: Container(
+                              padding: const EdgeInsets.all(5),
+                              decoration: const BoxDecoration(
+                                color: Colors.red,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Text(
+                                cartQuantity.toString(),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                ),
+                              ),
+                            ),
+                          ),
+                      ],
+                    );
+                  },
                 ),
                 const SizedBox(
                   width: 5,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_order/components/quantity_selector.dart';
+import 'package:food_order/constants/style.dart';
 import 'package:food_order/models/cart_item.dart';
 import 'package:food_order/models/restaurant.dart';
 import 'package:provider/provider.dart';
@@ -16,8 +17,17 @@ class CartTile extends StatelessWidget {
               padding: const EdgeInsets.all(10),
               margin: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
               decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.secondary,
-                  borderRadius: BorderRadius.circular(15)),
+                  color: Theme.of(context).colorScheme.tertiary,
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color:
+                          const Color.fromARGB(255, 3, 0, 0).withOpacity(0.2),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                      offset: const Offset(0, 3),
+                    ),
+                  ]),
               child: Column(
                 children: [
                   Row(
@@ -32,28 +42,43 @@ class CartTile extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(
-                        width: 10,
+                        width: 20,
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             cartItem.food.name,
-                            style: const TextStyle(fontWeight: FontWeight.bold),
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 17),
                           ),
-                          Text('\$${cartItem.food.price.toString()}',
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 16)),
-                          QuantitySelector(
-                              quantity: cartItem.quantity,
-                              food: cartItem.food,
-                              onIncrement: () {
-                                restaurant.addToCart(
-                                    cartItem.food, cartItem.selectedAddOns);
-                              },
-                              onDecrement: () {
-                                restaurant.removeFromCart(cartItem);
-                              }),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('\$${cartItem.food.price.toString()}',
+                                  style: TextStyle(
+                                      color: priceGreen,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 25)),
+                              const SizedBox(
+                                width: 15,
+                              ),
+                              QuantitySelector(
+                                quantity: cartItem.quantity,
+                                food: cartItem.food,
+                                onIncrement: () {
+                                  restaurant.addToCart(
+                                      cartItem.food, cartItem.selectedAddOns);
+                                },
+                                onDecrement: () {
+                                  restaurant.removeFromCart(cartItem);
+                                },
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                     ],

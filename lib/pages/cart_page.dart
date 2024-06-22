@@ -24,32 +24,19 @@ class _CartPageState extends State<CartPage> {
             title: const Text("Cart"),
             centerTitle: true,
             actions: [
-              IconButton(
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      title: const Text(
-                          "Are you sure you want to clear the cart?"),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: const Text("Cancel"),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            restaurant.clearCart();
-                            Navigator.pop(context);
-                          },
-                          child: const Text("Yes"),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-                icon: Icon(Icons.close),
+              Container(
+                margin: const EdgeInsets.only(right: 10),
+                decoration: const BoxDecoration(
+                    color: Colors.redAccent, shape: BoxShape.circle),
+                child: IconButton(
+                    onPressed: () {
+                      _clearCartDialog(context, restaurant);
+                    },
+                    icon: const Icon(
+                      Icons.delete_forever_rounded,
+                      color: Colors.white,
+                      size: 25,
+                    )),
               ),
             ],
           ),
@@ -88,6 +75,31 @@ class _CartPageState extends State<CartPage> {
           ),
         );
       },
+    );
+  }
+
+  Future<dynamic> _clearCartDialog(
+      BuildContext context, Restaurant restaurant) {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Are you sure you want to clear the cart?"),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text("Cancel"),
+          ),
+          TextButton(
+            onPressed: () {
+              restaurant.clearCart();
+              Navigator.pop(context);
+            },
+            child: const Text("Yes"),
+          ),
+        ],
+      ),
     );
   }
 }

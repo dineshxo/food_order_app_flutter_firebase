@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_order/components/main_button.dart';
+import 'package:food_order/constants/style.dart';
 import 'package:food_order/models/food.dart';
 import 'package:food_order/models/restaurant.dart';
 import 'package:provider/provider.dart';
@@ -47,25 +48,38 @@ class _FoodPageState extends State<FoodPage> {
                 fit: BoxFit.cover,
               ),
               Padding(
-                padding: const EdgeInsets.all(25.0),
+                padding: const EdgeInsets.only(
+                    left: 25.0, right: 25.0, bottom: 25, top: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      widget.food.name,
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            widget.food.name,
+                            style: const TextStyle(
+                                fontSize: 23, fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            '\$${widget.food.price.toString()}',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 25,
+                              color: priceGreen,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                    Text(
-                      '\$${widget.food.price.toString()}',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          color: Theme.of(context).colorScheme.primary),
-                    ),
-                    Text(widget.food.description),
                     const SizedBox(
                       height: 10,
+                    ),
+                    Text(widget.food.description),
+                    Divider(
+                      color: mainYellow,
                     ),
                     Text(
                       "Add-ons",
@@ -77,13 +91,31 @@ class _FoodPageState extends State<FoodPage> {
                     ListView.builder(
                         padding: EdgeInsets.zero,
                         shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
+                        // physics: const NeverScrollableScrollPhysics(),
                         itemCount: widget.food.availableAddOns.length,
                         itemBuilder: (context, index) {
                           AddOn addOn = widget.food.availableAddOns[index];
                           return CheckboxListTile(
-                            title: Text(addOn.name),
-                            subtitle: Text('\$${addOn.price.toString()}'),
+                            fillColor: WidgetStateProperty.resolveWith<Color>(
+                              (Set<WidgetState> states) {
+                                if (states.contains(WidgetState.selected)) {
+                                  return Colors.green;
+                                }
+                                return Colors.white;
+                              },
+                            ),
+                            title: Text(
+                              addOn.name,
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            subtitle: Text(
+                              '\$${addOn.price.toString()}',
+                              style: TextStyle(
+                                  color: priceGreen,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15),
+                            ),
                             value: widget.selectedAddOns[addOn],
                             onChanged: (value) {
                               setState(() {
@@ -105,7 +137,7 @@ class _FoodPageState extends State<FoodPage> {
       ),
       SafeArea(
         child: Opacity(
-          opacity: 1,
+          opacity: 0.9,
           child: Container(
             margin: const EdgeInsets.all(15),
             decoration: BoxDecoration(
