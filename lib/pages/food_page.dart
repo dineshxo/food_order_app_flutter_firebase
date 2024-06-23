@@ -7,30 +7,17 @@ import 'package:provider/provider.dart';
 
 class FoodPage extends StatefulWidget {
   final Food food;
-  final Map<AddOn, bool> selectedAddOns = {};
 
-  FoodPage({super.key, required this.food}) {
-    for (AddOn addOn in food.availableAddOns) {
-      selectedAddOns[addOn] = false;
-    }
-  }
+  FoodPage({Key? key, required this.food}) : super(key: key);
 
   @override
   State<FoodPage> createState() => _FoodPageState();
 }
 
 class _FoodPageState extends State<FoodPage> {
-  void addToCart(Food food, Map<AddOn, bool> selectedAddOns) {
+  void addToCart(Food food) {
     Navigator.pop(context);
-
-    List<AddOn> currentSelectedAddOns = [];
-
-    for (AddOn addOn in widget.food.availableAddOns) {
-      if (widget.selectedAddOns[addOn] == true) {
-        currentSelectedAddOns.add(addOn);
-      }
-    }
-    context.read<Restaurant>().addToCart(food, currentSelectedAddOns);
+    context.read<Restaurant>().addToCart(food);
   }
 
   @override
@@ -45,8 +32,9 @@ class _FoodPageState extends State<FoodPage> {
             children: [
               ClipRRect(
                 borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(30),
-                    bottomRight: Radius.circular(30)),
+                  bottomLeft: Radius.circular(30),
+                  bottomRight: Radius.circular(30),
+                ),
                 child: Image.asset(
                   widget.food.imagePath,
                   width: double.infinity,
@@ -72,7 +60,9 @@ class _FoodPageState extends State<FoodPage> {
                           Text(
                             widget.food.name,
                             style: const TextStyle(
-                                fontSize: 23, fontWeight: FontWeight.bold),
+                              fontSize: 23,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           Text(
                             '\$${widget.food.price.toString()}',
@@ -85,78 +75,16 @@ class _FoodPageState extends State<FoodPage> {
                         ],
                       ),
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
+                    const SizedBox(height: 10),
                     Text(widget.food.description),
-                    Divider(
-                      color: mainYellow,
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          "Add-ons",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        const Icon(
-                          Icons.add_box,
-                          color: Colors.green,
-                        )
-                      ],
-                    ),
+                    Divider(color: mainYellow),
                   ],
-                ),
-              ),
-              Expanded(
-                child: ListView.builder(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 25.0,
-                  ),
-                  itemCount: widget.food.availableAddOns.length,
-                  itemBuilder: (context, index) {
-                    AddOn addOn = widget.food.availableAddOns[index];
-                    return CheckboxListTile(
-                      fillColor: WidgetStateProperty.resolveWith<Color>(
-                        (Set<WidgetState> states) {
-                          if (states.contains(WidgetState.selected)) {
-                            return Colors.green;
-                          }
-                          return Colors.white;
-                        },
-                      ),
-                      title: Text(
-                        addOn.name,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: Text(
-                        '\$${addOn.price.toString()}',
-                        style: TextStyle(
-                          color: priceGreen,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
-                        ),
-                      ),
-                      value: widget.selectedAddOns[addOn],
-                      onChanged: (value) {
-                        setState(() {
-                          widget.selectedAddOns[addOn] = value!;
-                        });
-                      },
-                    );
-                  },
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: MainButton(
-                  onTap: () => addToCart(widget.food, widget.selectedAddOns),
+                  onTap: () => addToCart(widget.food),
                   text: "Add to cart",
                 ),
               ),
