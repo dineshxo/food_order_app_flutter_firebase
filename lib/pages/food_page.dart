@@ -35,7 +35,7 @@ class _FoodPageState extends State<FoodPage> {
                   bottomLeft: Radius.circular(30),
                   bottomRight: Radius.circular(30),
                 ),
-                child: Image.asset(
+                child: Image.network(
                   widget.food.imagePath,
                   width: double.infinity,
                   height: screenHeight / 2,
