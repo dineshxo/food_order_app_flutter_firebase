@@ -1,6 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:food_order/components/drawerTile.dart';
+import 'package:food_order/components/drawer_tile.dart';
 import 'package:food_order/pages/settings.dart';
 import 'package:food_order/services/auth/auth_service.dart';
 

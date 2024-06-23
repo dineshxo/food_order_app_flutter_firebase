@@ -10,10 +10,6 @@ class Receipt extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const Text(
-          "Thank You for Your Order.",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-        ),
         const SizedBox(
           height: 10,
         ),
