@@ -112,7 +112,10 @@ class _CartPageState extends State<CartPage> {
     return showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text("Are you sure you want to clear the cart?"),
+        title: const Text(
+          "Are you sure you want to clear the cart?",
+          style: TextStyle(fontSize: 18),
+        ),
         actions: [
           TextButton(
             onPressed: () {
@@ -125,7 +128,10 @@ class _CartPageState extends State<CartPage> {
               restaurant.clearCart();
               Navigator.pop(context);
             },
-            child: const Text("Yes"),
+            child: const Text(
+              "Yes",
+              style: TextStyle(color: Colors.green),
+            ),
           ),
         ],
       ),

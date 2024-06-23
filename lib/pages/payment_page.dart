@@ -6,7 +6,7 @@ import 'package:u_credit_card/u_credit_card.dart';
 
 class PaymentPage extends StatefulWidget {
   final double total;
-  const PaymentPage({Key? key, required this.total}) : super(key: key);
+  const PaymentPage({super.key, required this.total});
 
   @override
   State<PaymentPage> createState() => _PaymentPageState();
@@ -26,7 +26,10 @@ class _PaymentPageState extends State<PaymentPage> {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text("Confirm Pay"),
+          title: const Text(
+            "Confirm Pay",
+            style: TextStyle(fontSize: 18),
+          ),
           actions: [
             TextButton(
               onPressed: () {
@@ -41,7 +44,10 @@ class _PaymentPageState extends State<PaymentPage> {
                   builder: (context) => const DeliveryPage(),
                 ),
               ),
-              child: const Text("Pay"),
+              child: const Text(
+                "Pay",
+                style: TextStyle(color: Colors.green),
+              ),
             ),
           ],
         ),

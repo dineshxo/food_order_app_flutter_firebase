@@ -16,18 +16,6 @@ class CartTile extends StatelessWidget {
         builder: (context, restaurant, child) => Container(
               padding: const EdgeInsets.all(10),
               margin: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-              // decoration: BoxDecoration(
-              //     color: Theme.of(context).colorScheme.tertiary,
-              //     borderRadius: BorderRadius.circular(15),
-              //     boxShadow: [
-              //       BoxShadow(
-              //         color:
-              //             const Color.fromARGB(255, 3, 0, 0).withOpacity(0.2),
-              //         spreadRadius: 2,
-              //         blurRadius: 5,
-              //         offset: const Offset(0, 3),
-              //       ),
-              //     ]),
               child: Column(
                 children: [
                   Row(

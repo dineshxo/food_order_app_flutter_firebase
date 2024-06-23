@@ -28,7 +28,33 @@ class _LoginPageState extends State<LoginPage> {
       showDialog(
           context: context,
           builder: (context) => AlertDialog(
-                title: Text(e.toString()),
+                title: Column(
+                  children: [
+                    const Icon(
+                      Icons.error,
+                      size: 50,
+                      color: Colors.redAccent,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      e.toString(),
+                      style: const TextStyle(fontSize: 18),
+                    ),
+                  ],
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text(
+                      "Try Again",
+                      style: TextStyle(color: Colors.green),
+                    ),
+                  ),
+                ],
               ));
     }
   }

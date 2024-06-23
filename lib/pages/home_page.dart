@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:food_order/components/current_location.dart';
 
 import 'package:food_order/components/food_tile.dart';
-import 'package:food_order/components/navBar_menu_button.dart';
+import 'package:food_order/components/nav_bar_menu_button.dart';
 
-import 'package:food_order/constants/style.dart';
 import 'package:food_order/models/food.dart';
 import 'package:food_order/models/restaurant.dart';
 import 'package:food_order/pages/cart_page.dart';
 import 'package:food_order/pages/food_page.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:provider/provider.dart';
 
-import '../components/appDrawer.dart';
+import '../components/app_drawer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -26,7 +25,7 @@ class _HomePageState extends State<HomePage> {
   late Map<FoodCategory, List<Food>> _categorizedMenu;
   FoodCategory _selectedCategory = FoodCategory.burgers;
 
-  TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
