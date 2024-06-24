@@ -19,13 +19,14 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController passwordController = TextEditingController();
 
   void login() async {
-    final _authService = AuthService();
+    final authService = AuthService();
 
     try {
-      await _authService.signInWithEmailPassword(
+      await authService.signInWithEmailPassword(
           emailController.text, passwordController.text);
     } catch (e) {
       showDialog(
+          // ignore: use_build_context_synchronously
           context: context,
           builder: (context) => AlertDialog(
                 title: Column(
@@ -141,7 +142,6 @@ class _LoginPageState extends State<LoginPage> {
                             Text(
                               "Continue with Apple",
                               style: TextStyle(
-                                  fontWeight: FontWeight.bold,
                                   color: Theme.of(context)
                                       .colorScheme
                                       .inversePrimary,
@@ -172,7 +172,6 @@ class _LoginPageState extends State<LoginPage> {
                             Text(
                               "Continue with Google",
                               style: TextStyle(
-                                  fontWeight: FontWeight.bold,
                                   color: Theme.of(context)
                                       .colorScheme
                                       .inversePrimary,

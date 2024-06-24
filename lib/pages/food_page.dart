@@ -4,11 +4,12 @@ import 'package:food_order/constants/style.dart';
 import 'package:food_order/models/food.dart';
 import 'package:food_order/models/restaurant.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class FoodPage extends StatefulWidget {
   final Food food;
 
-  FoodPage({Key? key, required this.food}) : super(key: key);
+  const FoodPage({super.key, required this.food});
 
   @override
   State<FoodPage> createState() => _FoodPageState();
@@ -38,7 +39,7 @@ class _FoodPageState extends State<FoodPage> {
                 child: Image.network(
                   widget.food.imagePath,
                   width: double.infinity,
-                  height: screenHeight / 2,
+                  height: screenHeight / 1.9,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -54,8 +55,8 @@ class _FoodPageState extends State<FoodPage> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(right: 10.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             widget.food.name,
@@ -72,15 +73,21 @@ class _FoodPageState extends State<FoodPage> {
                               color: priceGreen,
                             ),
                           ),
+                          const Row(
+                            children: [
+                              RatingBarFood(),
+                            ],
+                          ),
                         ],
                       ),
                     ),
+                    Divider(color: mainYellow),
                     const SizedBox(height: 10),
                     Text(widget.food.description),
-                    Divider(color: mainYellow),
                   ],
                 ),
               ),
+              const Spacer(),
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: MainButton(
@@ -108,6 +115,31 @@ class _FoodPageState extends State<FoodPage> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class RatingBarFood extends StatelessWidget {
+  const RatingBarFood({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return RatingBar.builder(
+      itemSize: 25,
+      initialRating: 4.5,
+      minRating: 1,
+      direction: Axis.horizontal,
+      allowHalfRating: true,
+      itemCount: 5,
+      itemPadding: const EdgeInsets.symmetric(horizontal: 1.0),
+      itemBuilder: (context, _) => const Icon(
+        Icons.star,
+        color: Colors.amber,
+        size: 20,
+      ),
+      onRatingUpdate: (rating) {},
     );
   }
 }
