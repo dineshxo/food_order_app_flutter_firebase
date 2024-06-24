@@ -3,6 +3,7 @@ import 'package:food_order/components/main_button.dart';
 import 'package:food_order/components/receipt.dart';
 import 'package:food_order/models/restaurant.dart';
 import 'package:food_order/pages/home_page.dart';
+import 'package:food_order/services/auth/auth_check.dart';
 import 'package:food_order/services/database/firestore.dart';
 import 'package:provider/provider.dart';
 
@@ -78,7 +79,7 @@ class _DeliveryPageState extends State<DeliveryPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const HomePage()));
+                          builder: (context) => const AuthCheck()));
                 },
                 text: "Home",
               ),
