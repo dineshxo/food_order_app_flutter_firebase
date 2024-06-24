@@ -8,10 +8,10 @@ class Receipt extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const Text("Thank You for Your Order."),
         const SizedBox(
-          height: 25,
+          height: 10,
         ),
         Container(
           padding: const EdgeInsets.all(20),

@@ -37,32 +37,53 @@ class CurrentLocation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(25.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      padding: const EdgeInsets.only(left: 10.0, top: 15, bottom: 10),
+      child: Row(
         children: [
-          Text(
-            "Deliver now,",
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.primary,
+          ClipRRect(
+            borderRadius: BorderRadius.circular(40),
+            child: Image.asset(
+              'images/avatar.jpg',
+              height: 45,
+              width: 45,
+              fit: BoxFit.cover,
             ),
           ),
-          GestureDetector(
-            onTap: () => openLocationSearchBox(context),
-            child: Row(
-              children: [
-                Consumer<Restaurant>(
-                  builder: (context, restaurant, child) => Text(
-                    restaurant.deliveryAddress,
-                    style: TextStyle(
-                        color: Theme.of(context).colorScheme.inversePrimary,
-                        fontWeight: FontWeight.bold),
-                  ),
+          const SizedBox(
+            width: 10,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Deliver now,",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
-                const Icon(Icons.keyboard_arrow_down_rounded)
-              ],
-            ),
-          )
+              ),
+              GestureDetector(
+                onTap: () => openLocationSearchBox(context),
+                child: Row(
+                  children: [
+                    Consumer<Restaurant>(builder: (context, restaurant, child) {
+                      String displayAddress = restaurant.deliveryAddress.isEmpty
+                          ? "Your location"
+                          : restaurant.deliveryAddress;
+                      return Text(
+                        displayAddress,
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.inversePrimary,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16),
+                      );
+                    }),
+                    const Icon(Icons.keyboard_arrow_down_rounded)
+                  ],
+                ),
+              )
+            ],
+          ),
         ],
       ),
     );

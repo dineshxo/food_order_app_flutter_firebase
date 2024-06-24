@@ -1,6 +1,7 @@
 {
     "cSpell.words": [
-        "Drawertile"
+        "Drawertile",
+        "writeln"
     ],
     "java.configuration.updateBuildConfiguration": "interactive"
 }

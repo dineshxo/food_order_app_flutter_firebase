@@ -23,13 +23,18 @@ class QuantitySelector extends StatelessWidget {
       ),
       padding: const EdgeInsets.all(8),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           GestureDetector(
             onTap: onDecrement,
-            child: const Icon(
-              Icons.remove,
-              size: 20,
-              color: Colors.red,
+            child: Container(
+              decoration: const BoxDecoration(
+                  color: Colors.redAccent, shape: BoxShape.circle),
+              child: const Icon(
+                Icons.remove,
+                size: 20,
+                color: Colors.white,
+              ),
             ),
           ),
           Padding(
@@ -39,16 +44,22 @@ class QuantitySelector extends StatelessWidget {
               child: Center(
                 child: Text(
                   quantity.toString(),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 15),
                 ),
               ),
             ),
           ),
           GestureDetector(
             onTap: onIncrement,
-            child: const Icon(
-              Icons.add,
-              size: 20,
-              color: Colors.green,
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.green.shade400, shape: BoxShape.circle),
+              child: const Icon(
+                Icons.add,
+                size: 20,
+                color: Colors.white,
+              ),
             ),
           )
         ],
