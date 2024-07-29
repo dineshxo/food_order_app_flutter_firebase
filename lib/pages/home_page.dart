@@ -1,18 +1,12 @@
-// ignore_for_file: unused_field
-
 import 'package:flutter/material.dart';
 import 'package:food_order/components/current_location.dart';
-
 import 'package:food_order/components/food_tile.dart';
 import 'package:food_order/components/nav_bar_menu_button.dart';
-
 import 'package:food_order/models/food.dart';
 import 'package:food_order/models/restaurant.dart';
 import 'package:food_order/pages/cart_page.dart';
 import 'package:food_order/pages/food_page.dart';
-
 import 'package:provider/provider.dart';
-
 import '../components/app_drawer.dart';
 
 class HomePage extends StatefulWidget {
@@ -24,19 +18,24 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late List<Food> _fullMenu;
-  late Map<FoodCategory, List<Food>> _categorizedMenu;
+  late Map<FoodCategory, List<Food>> _categorizedMenu = {};
   FoodCategory _selectedCategory = FoodCategory.burgers;
-
   final TextEditingController _searchController = TextEditingController();
-
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
+    _initializeMenu();
+  }
+
+  Future<void> _initializeMenu() async {
     final restaurant = Provider.of<Restaurant>(context, listen: false);
-    _fullMenu = restaurant.getFullMenu();
-    _categorizedMenu = restaurant.categorizeFoodItems();
+    await restaurant.initializeMenu();
+    setState(() {
+      _fullMenu = restaurant.getFullMenu();
+      _categorizedMenu = restaurant.categorizeFoodItems();
+    });
   }
 
   @override

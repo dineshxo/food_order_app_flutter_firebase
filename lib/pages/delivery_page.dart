@@ -4,7 +4,7 @@ import 'package:food_order/components/receipt.dart';
 import 'package:food_order/models/restaurant.dart';
 import 'package:food_order/pages/home_page.dart';
 import 'package:food_order/services/auth/auth_check.dart';
-import 'package:food_order/services/database/firestore.dart';
+import 'package:food_order/services/database/order_services.dart';
 import 'package:provider/provider.dart';
 
 class DeliveryPage extends StatefulWidget {
