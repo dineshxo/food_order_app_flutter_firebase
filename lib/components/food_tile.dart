@@ -22,9 +22,11 @@ class FoodTile extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: Image.asset(
+                  child: Image.network(
                     food.imagePath,
                     height: 80,
+                    width: 80,
+                    fit: BoxFit.cover,
                   ),
                 ),
                 const SizedBox(
@@ -46,7 +48,7 @@ class FoodTile extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           fontSize: 18),
                     ),
-                    Text(food.description),
+                    Text(_shortenDescription(food.description)),
                   ],
                 )),
                 Container(
@@ -71,5 +73,13 @@ class FoodTile extends StatelessWidget {
         )
       ],
     );
+  }
+
+  String _shortenDescription(String description, {int maxLength = 50}) {
+    if (description.length <= maxLength) {
+      return description;
+    } else {
+      return '${description.substring(0, maxLength)}...';
+    }
   }
 }
