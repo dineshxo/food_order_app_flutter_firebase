@@ -77,7 +77,9 @@ class Restaurant extends ChangeNotifier {
 
   String displayCartReceipt() {
     final receipt = StringBuffer();
-    receipt.writeln("Here's your receipt");
+    receipt.writeln(
+      "Here's your receipt",
+    );
     receipt.writeln("---------------------------------------");
     receipt.writeln();
 

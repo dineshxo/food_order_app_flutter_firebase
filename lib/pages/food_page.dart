@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_order/components/main_button.dart';
+import 'package:food_order/components/quantity_selector.dart';
 import 'package:food_order/constants/style.dart';
 import 'package:food_order/models/food.dart';
 import 'package:food_order/models/restaurant.dart';
@@ -33,8 +34,8 @@ class _FoodPageState extends State<FoodPage> {
             children: [
               ClipRRect(
                 borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(30),
-                  bottomRight: Radius.circular(30),
+                  bottomLeft: Radius.circular(40),
+                  bottomRight: Radius.circular(40),
                 ),
                 child: Image.network(
                   widget.food.imagePath,
@@ -65,6 +66,9 @@ class _FoodPageState extends State<FoodPage> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
+                          const SizedBox(height: 10),
+                          Text(widget.food.description),
+                          Divider(color: mainYellow),
                           Text(
                             '\$${widget.food.price.toString()}',
                             style: TextStyle(
@@ -81,9 +85,7 @@ class _FoodPageState extends State<FoodPage> {
                         ],
                       ),
                     ),
-                    Divider(color: mainYellow),
                     const SizedBox(height: 10),
-                    Text(widget.food.description),
                   ],
                 ),
               ),
@@ -99,18 +101,15 @@ class _FoodPageState extends State<FoodPage> {
           ),
         ),
         SafeArea(
-          child: Opacity(
-            opacity: 0.9,
-            child: Container(
-              margin: const EdgeInsets.all(15),
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.tertiary,
-                shape: BoxShape.circle,
-              ),
-              child: IconButton(
-                onPressed: () => Navigator.pop(context),
-                icon: const Icon(Icons.arrow_back_ios_rounded),
-              ),
+          child: Container(
+            margin: const EdgeInsets.all(15),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.tertiary,
+              shape: BoxShape.circle,
+            ),
+            child: IconButton(
+              onPressed: () => Navigator.pop(context),
+              icon: const Icon(Icons.arrow_back_ios_rounded),
             ),
           ),
         ),
