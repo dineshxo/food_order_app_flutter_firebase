@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_order/components/drawer_tile.dart';
+import 'package:food_order/constants/style.dart';
 import 'package:food_order/pages/settings.dart';
 import 'package:food_order/services/auth/auth_service.dart';
 
@@ -26,7 +27,7 @@ class AppDrawer extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            const Divider(),
+            Divider(color: mainYellow),
             DrawerTile(
               title: "Home",
               icon: Icons.home,
@@ -49,8 +50,8 @@ class AppDrawer extends StatelessWidget {
               title: "Logout",
               icon: Icons.logout,
               onTap: () async {
-                final _authServices = AuthService();
-                await _authServices.signOut();
+                final authServices = AuthService();
+                await authServices.signOut();
               },
             ),
           ],

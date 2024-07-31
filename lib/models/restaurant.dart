@@ -2,17 +2,25 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:food_order/models/cart_item.dart';
 import 'package:food_order/models/food.dart';
-import 'package:food_order/services/food_data/food_list.dart';
+import 'package:food_order/services/database/food_services.dart';
+
 import 'package:intl/intl.dart';
 
 class Restaurant extends ChangeNotifier {
-  final List<Food> _menu = foodMenu;
+  List<Food> _menu = [];
   final List<CartItem> _cart = [];
   String _deliveryAddress = '';
 
   List<Food> get menu => _menu;
   List<CartItem> get cart => _cart;
   String get deliveryAddress => _deliveryAddress;
+
+  Future<void> fetchAndStoreFoodMenu() async {
+    final FoodService foodService = FoodService();
+    List<Food> fetchedMenu = await foodService.fetchFoodMenu();
+    _menu = fetchedMenu;
+    notifyListeners();
+  }
 
   void updateDeliveryAddress(String newAddress) {
     _deliveryAddress = newAddress;
@@ -69,7 +77,9 @@ class Restaurant extends ChangeNotifier {
 
   String displayCartReceipt() {
     final receipt = StringBuffer();
-    receipt.writeln("Here's your receipt");
+    receipt.writeln(
+      "Here's your receipt",
+    );
     receipt.writeln("---------------------------------------");
     receipt.writeln();
 
@@ -97,6 +107,10 @@ class Restaurant extends ChangeNotifier {
 
   String _formatPrice(double price) {
     return "\$${price.toStringAsFixed(2)}";
+  }
+
+  Future<void> initializeMenu() async {
+    await fetchAndStoreFoodMenu();
   }
 
   List<Food> getFullMenu() {

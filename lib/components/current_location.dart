@@ -11,10 +11,14 @@ class CurrentLocation extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text("Your Location"),
+        title: const Text(
+          "Your Location",
+          style: TextStyle(fontSize: 18),
+        ),
         content: TextField(
           controller: addressController,
-          decoration: const InputDecoration(hintText: "Enter Address"),
+          decoration: const InputDecoration(
+              hintText: "Enter Address", hintStyle: TextStyle(fontSize: 15)),
         ),
         actions: [
           MaterialButton(
@@ -27,7 +31,10 @@ class CurrentLocation extends StatelessWidget {
               String newAddress = addressController.text;
               context.read<Restaurant>().updateDeliveryAddress(newAddress);
             },
-            child: const Text("Save"),
+            child: const Text(
+              "Save",
+              style: TextStyle(color: Colors.green),
+            ),
           ),
         ],
       ),
