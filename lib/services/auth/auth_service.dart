@@ -12,8 +12,7 @@ class AuthService {
       UserCredential userCredential = await _firebaseAuth
           .signInWithEmailAndPassword(email: email, password: password);
       return userCredential;
-    } //Catch firebase Exception
-    on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (e) {
       throw Exception(e.code);
     }
   }
@@ -23,8 +22,7 @@ class AuthService {
       UserCredential userCredential = await _firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password);
       return userCredential;
-    } //Catch firebase Exception
-    on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (e) {
       throw Exception(e.code);
     }
   }
