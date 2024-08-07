@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 class CartTile extends StatelessWidget {
   final CartItem cartItem;
 
-  const CartTile({Key? key, required this.cartItem}) : super(key: key);
+  const CartTile({super.key, required this.cartItem});
 
   @override
   Widget build(BuildContext context) {

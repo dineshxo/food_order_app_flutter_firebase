@@ -1,4 +1,3 @@
-// import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/material.dart';
@@ -27,23 +26,6 @@ void main() async {
     ),
   );
 }
-
-// void main() async {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-//   runApp(MultiProvider(
-//     providers: [
-//       ChangeNotifierProvider(
-//         create: (context) => ThemeProvider(),
-//       ),
-//       ChangeNotifierProvider(create: (context) => Restaurant())
-//     ],
-//     child: DevicePreview(
-//       enabled: !kReleaseMode,
-//       builder: (context) => const MyApp(), // Wrap your app
-//     ),
-//   ));
-// }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
