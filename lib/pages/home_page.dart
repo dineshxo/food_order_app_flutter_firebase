@@ -145,8 +145,7 @@ class _HomePageState extends State<HomePage> {
           hintText: "Search for foods...",
           hintStyle: TextStyle(color: Colors.black),
           border: InputBorder.none,
-          contentPadding: EdgeInsets.symmetric(
-              vertical: 15), // Adjust the vertical padding here
+          contentPadding: EdgeInsets.symmetric(vertical: 15),
         ),
       ),
     );
@@ -159,7 +158,7 @@ class _HomePageState extends State<HomePage> {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: FoodCategory.values.length,
-        clipBehavior: Clip.none, // Prevent clipping of child shadows
+        clipBehavior: Clip.none,
         itemBuilder: (context, index) {
           FoodCategory category = FoodCategory.values[index];
           bool isSelected = _selectedCategory == category;
